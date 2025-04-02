@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image | Image Uploader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .upload-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .file-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .preview {
+            margin-top: 10px;
+            display: none;
+        }
+        .preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .cta {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .cta a {
+            color: #28a745;
+            text-decoration: none;
+        }
+        .cta a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h2>Upload Image</h2>
+
+        <!-- Display error or success messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" onsubmit="return validateFile()">
+            {% csrf_token %}
+            
+            <input type="file" id="imageInput" name="image" class="file-input" accept="image/png, image/jpeg, image/jpg" required>
+            <div class="preview" id="imagePreview">
+                <img id="previewImg" src="#" alt="Image Preview">
+            </div>
+
+            <button type="submit" class="btn">Upload</button>
+        </form>
+
+        <div class="cta">
+            <p>Need help? <a href="#">Contact Support</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Function to validate file before upload
+        function validateFile() {
+            var fileInput = document.getElementById('imageInput');
+            var file = fileInput.files[0];
+            var allowedExtensions = ["image/jpeg", "image/png", "image/jpg"];
+            
+            if (file) {
+                if (!allowedExtensions.includes(file.type)) {
+                    alert("Invalid file type! Please upload JPG, JPEG, or PNG.");
+                    return false;
+                }
+                if (file.size > 5 * 1024 * 1024) {  // 5MB limit
+                    alert("File size too large! Please upload an image under 5MB.");
+                    return false;
+                }
+            } else {
+                alert("Please select an image to upload.");
+                return false;
+            }
+            return true;
+        }
+
+        // Image preview function
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>

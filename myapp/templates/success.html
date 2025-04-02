@@ -1,0 +1,10 @@
+<!-- success.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="success">
+    <h2>Success!</h2>
+    <p>Your image has been uploaded and optimized.</p>
+    <a href="{% url 'upload' %}" class="btn-primary">Upload Another Image</a>
+</section>
+{% endblock %}

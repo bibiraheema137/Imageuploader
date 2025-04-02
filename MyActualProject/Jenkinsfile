@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        DJANGO_ENV = 'production'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from the repository
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install dependencies using pip
+                    sh 'pip install -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run Django tests
+                    sh 'python manage.py test'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Build Docker image (optional step)
+                    sh 'docker build -t my-django-app .'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Deploy the app (you can customize this for your deployment setup)
+                    sh 'docker run -d -p 8000:8000 my-django-app'
+                }
+            }
+        }
+    }
+}

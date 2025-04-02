@@ -1,0 +1,9 @@
+<!-- logout.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth-form">
+    <h2>You have successfully logged out.</h2>
+    <a href="{% url 'login' %}" class="btn-primary">Login Again</a>
+</section>
+{% endblock %}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageUploader - Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+        }
+        .hero {
+            padding: 100px 20px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .footer {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">ImageUploader</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/gallery/">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>Welcome to ImageUploader</h1>
+        <p>Upload and manage your images effortlessly.</p>
+        <a href="/register/" class="btn btn-light btn-lg">Get Started</a>
+        <a href="/gallery/" class="btn btn-outline-light btn-lg">View Gallery</a>
+    </section>
+    
+    <div class="container my-5">
+        <div class="row text-dark">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Easy Upload</h3>
+                    <p>Drag and drop or select images from your device.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Secure Storage</h3>
+                    <p>Your images are stored safely with us.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h3>Access Anytime</h3>
+                    <p>View your images anywhere, anytime.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2025 ImageUploader. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
